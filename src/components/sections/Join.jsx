@@ -132,7 +132,7 @@ export function Join() {
       </div>
 
       {applicationPending && (
-        <p className="text-center text-xs text-zinc-500 font-mono mt-5 max-w-md mx-auto">
+        <p className="text-center text-xs text-zinc-400 font-mono mt-5 max-w-md mx-auto">
           Our application form is being set up. Email us in the meantime and we will add you to the
           next orientation.
         </p>

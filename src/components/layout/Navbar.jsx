@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 
 import { navItems } from '../../data/site.js';
@@ -17,6 +17,7 @@ const DESKTOP_NAV_ITEMS = navItems.filter((item) => !item.hideInDesktop && item.
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navRef = useRef(null);
 
   const activeId = useScrollSpy(SECTION_IDS, { offset: 120 });
   useLockBodyScroll(mobileOpen);
@@ -43,6 +44,21 @@ export function Navbar() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [mobileOpen]);
 
+  // A tap or click anywhere outside the header closes the drawer.
+  // Uses pointerdown (fires for mouse, touch and pen in one listener) and
+  // checks containment, so the very press that opened the drawer is ignored
+  // and presses on drawer links are left to scrollToId.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handlePointerDown = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setMobileOpen(false);
+      }
+    };
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => document.removeEventListener('pointerdown', handlePointerDown);
+  }, [mobileOpen]);
+
   const scrollToId = (id) => {
     setMobileOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -66,6 +82,7 @@ export function Navbar() {
       </a>
 
       <nav
+        ref={navRef}
         aria-label="Primary"
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
@@ -140,7 +157,8 @@ export function Navbar() {
             })}
           </ul>
 
-          {/* CTA + menu toggle */}
+          {/* CTA + menu toggle. The CTA doubles as the "Join" nav target, so
+              it carries aria-current when the Join section is in view. */}
           <div className="flex items-center gap-3">
             <a
               href="#join"
@@ -148,7 +166,11 @@ export function Navbar() {
                 event.preventDefault();
                 scrollToId(joinItem.id);
               }}
-              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg btn-crimson text-xs font-bold tracking-wide active:scale-95 focus-visible:outline-none"
+              aria-current={activeId === joinItem.id ? 'true' : undefined}
+              className={cn(
+                'hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg btn-crimson text-xs font-bold tracking-wide active:scale-95 focus-visible:outline-none',
+                activeId === joinItem.id && 'ring-1 ring-[#ff4d6d]'
+              )}
             >
               <span>Join HWI</span>
               <ArrowRight size={13} />

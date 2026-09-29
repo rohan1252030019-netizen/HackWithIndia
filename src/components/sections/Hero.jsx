@@ -124,7 +124,7 @@ export function Hero() {
           <span className="w-2 h-2 rounded-full bg-[#ff003c] animate-ping" />
           <span className="text-[#ff4d6d] font-bold">git checkout</span>
           <span className="text-zinc-300">{hero.repoBranch}</span>
-          <span className="text-zinc-500">·</span>
+          <span className="text-zinc-400">·</span>
           <span className="text-zinc-300">{site.campus.name}</span>
         </div>
 

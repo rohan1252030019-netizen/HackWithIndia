@@ -11,15 +11,15 @@ TypeScript.
 
 ## Commands
 
-| Command               | What it does                          |
-| --------------------- | ------------------------------------- |
-| `npm install`         | Install dependencies                  |
-| `npm run dev`         | Dev server with HMR                   |
-| `npm run build`       | Production build into `dist/`         |
-| `npm run preview`     | Serve the production build locally    |
-| `npm run lint`        | oxlint                                |
-| `npm run format`      | Prettier, write                       |
-| `npm run format:check`| Prettier, verify only                 |
+| Command                | What it does                       |
+| ---------------------- | ---------------------------------- |
+| `npm install`          | Install dependencies               |
+| `npm run dev`          | Dev server with HMR                |
+| `npm run build`        | Production build into `dist/`      |
+| `npm run preview`      | Serve the production build locally |
+| `npm run lint`         | oxlint                             |
+| `npm run format`       | Prettier, write                    |
+| `npm run format:check` | Prettier, verify only              |
 
 ---
 
@@ -67,13 +67,13 @@ announced" state for each one rather than inventing a value. Find them all with:
 grep -rn "TODO_" src/ index.html public/
 ```
 
-| Placeholder                       | Where                | What to put                                                        |
-| --------------------------------- | -------------------- | ------------------------------------------------------------------ |
-| `TODO_UPDATE_PRODUCTION_DOMAIN`   | `site.js`, `index.html`, `robots.txt`, `sitemap.xml` | Live origin, no trailing slash |
-| `TODO_ADD_JOIN_FORM_URL`          | `site.js`, `join.js`, `events.js` | Official HWI join / registration form URL |
-| `TODO_UPDATE_CHAPTER_EMAIL`       | `site.js`            | The chapter's own inbox, if different from the national one         |
-| `TODO_UPDATE_THIS`                | `site.js`            | Real social handles (GitHub, LinkedIn, Instagram, Discord, X)      |
-| `TODO_TIME`                       | `events.js`          | Start times, once the committee confirms them                       |
+| Placeholder                     | Where                                                | What to put                                                   |
+| ------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------- |
+| `TODO_UPDATE_PRODUCTION_DOMAIN` | `site.js`, `index.html`, `robots.txt`, `sitemap.xml` | Live origin, no trailing slash                                |
+| `TODO_ADD_JOIN_FORM_URL`        | `site.js`, `join.js`, `events.js`                    | Official HWI join / registration form URL                     |
+| `TODO_UPDATE_CHAPTER_EMAIL`     | `site.js`                                            | The chapter's own inbox, if different from the national one   |
+| `TODO_UPDATE_THIS`              | `site.js`                                            | Real social handles (GitHub, LinkedIn, Instagram, Discord, X) |
+| `TODO_TIME`                     | `events.js`                                          | Start times, once the committee confirms them                 |
 
 Also awaiting real content:
 
@@ -114,9 +114,26 @@ Also awaiting real content:
 - Skip-to-content link, visible focus rings on every interactive element
 - Real `<button>` / `<a>` elements; accordions wired with `aria-expanded`,
   `aria-controls`, `aria-labelledby`
-- Active nav state exposed via `aria-current`
-- Body scroll locks and `Escape` closes the mobile drawer
+- Active nav state exposed via `aria-current` (including the Join CTA)
+- Mobile drawer: body scroll locks, and it closes on `Escape`, on a tap outside,
+  and when the viewport grows past `lg`
+- Collapsed accordion and drawer content use `visibility: hidden`, so it leaves
+  both the tab order and the accessibility tree
 - Motion is opt-out via `prefers-reduced-motion`
+
+### Text contrast floor
+
+All body-sized text is at least `zinc-400` (`#a1a1aa`, 7.6:1 on the card
+surface). Measured in-browser against the real surfaces:
+
+| Colour     | On `#0d0d12` | On `#07070a` | Verdict      |
+| ---------- | -----------: | -----------: | ------------ |
+| `zinc-300` |         13.1 |         13.6 | AA + AAA     |
+| `zinc-400` |          7.6 |          7.9 | AA           |
+| `zinc-500` |          4.0 |          4.2 | **FAILS AA** |
+
+Do not use `zinc-500` or lighter for text at 14px or below — WCAG AA requires
+4.5:1. Decorative separators and hairline borders are exempt.
 
 ---
 

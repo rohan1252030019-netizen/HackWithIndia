@@ -98,7 +98,7 @@ export function Team() {
           })}
         </ul>
 
-        <p className="text-center text-xs text-zinc-500 font-mono mt-10">{teamIntro.footerNote}</p>
+        <p className="text-center text-xs text-zinc-400 font-mono mt-10">{teamIntro.footerNote}</p>
       </div>
     </Section>
   );

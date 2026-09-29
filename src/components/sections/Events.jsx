@@ -151,7 +151,7 @@ export function Events() {
         ))}
       </div>
 
-      <p className="text-center text-xs text-zinc-500 font-mono mt-10">
+      <p className="text-center text-xs text-zinc-400 font-mono mt-10">
         Dates are published as the committee confirms them. Bookmark this page.
       </p>
     </Section>

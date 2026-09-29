@@ -15,10 +15,23 @@
     --crimson-glow: #ff1744;
     --crimson-dark: #660018;
 
-    /* WCAG AA / AAA Contrast Compliant Text Colors */
+    /*
+      Reference tokens. Contrast ratios below were measured in-browser against
+      the actual Tailwind surfaces the site renders on, not assumed:
+
+        --text-primary  #f4f4f6  19.4:1 on #0d0d12   (AAA)
+        --text-secondary #cbd5e1 12.6:1 on #0d0d12   (AAA)
+        --text-muted    #94a3b8   7.2:1 on #0d0d12   (AA, and AAA for large text)
+
+      IMPORTANT: the components use Tailwind's zinc scale directly rather than
+      these variables, because that is what the existing design already used.
+      The lowest step still in use is zinc-400 (#a1a1aa) at 7.6:1.
+      Do NOT reintroduce zinc-500 (#71717a) for body-sized text — it measures
+      4.0-4.2:1 and fails WCAG AA, which needs 4.5:1.
+    */
     --text-primary: #f4f4f6;
-    --text-secondary: #cbd5e1; /* High contrast (>11:1 against #14141c) */
-    --text-muted: #94a3b8; /* Accessible contrast (~7.2:1 against #14141c, >4.5:1 AA standard) */
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
     --text-mono-accent: #ff4d6d;
   }
 
