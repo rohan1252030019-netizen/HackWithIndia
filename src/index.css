@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @layer base {
   :root {
@@ -6,23 +6,25 @@
     --bg-surface-1: #0d0d12;
     --bg-surface-2: #14141c;
     --bg-surface-3: #1b1b26;
-    
+
     --border-subtle: rgba(255, 255, 255, 0.08);
     --border-muted: rgba(255, 255, 255, 0.16);
     --border-crimson: rgba(255, 0, 60, 0.45);
-    
+
     --crimson-primary: #ff003c;
     --crimson-glow: #ff1744;
     --crimson-dark: #660018;
-    
+
     /* WCAG AA / AAA Contrast Compliant Text Colors */
     --text-primary: #f4f4f6;
     --text-secondary: #cbd5e1; /* High contrast (>11:1 against #14141c) */
-    --text-muted: #94a3b8;     /* Accessible contrast (~7.2:1 against #14141c, >4.5:1 AA standard) */
+    --text-muted: #94a3b8; /* Accessible contrast (~7.2:1 against #14141c, >4.5:1 AA standard) */
     --text-mono-accent: #ff4d6d;
   }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -37,14 +39,24 @@
   body {
     background-color: var(--bg-base);
     color: var(--text-primary);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   /* Universal Accessible Focus States */
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, [tabindex="0"]:focus-visible {
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  [tabindex='0']:focus-visible {
     outline: 2px solid var(--crimson-primary) !important;
     outline-offset: 3px !important;
     border-radius: 6px;
@@ -75,7 +87,12 @@
    TYPOGRAPHY CLASSES - CONSOLIDATED TO CABINET GROTESK
 ───────────────────────────────────────────────────────────── */
 .font-display {
-  font-family: 'Cabinet Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:
+    'Cabinet Grotesk',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
   letter-spacing: -0.025em;
 }
 
@@ -89,24 +106,34 @@
 
 /* Git Commit Grid & Fine Gridlines */
 .bg-builder-grid {
-  background-image: 
+  background-image:
     radial-gradient(rgba(255, 0, 60, 0.07) 1px, transparent 1px),
     linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 24px 24px, 72px 72px, 72px 72px;
+  background-size:
+    24px 24px,
+    72px 72px,
+    72px 72px;
 }
 
 /* Translucent Terminal Surface */
 .surface-terminal {
   background: #0d0d12;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  box-shadow:
+    0 12px 36px -8px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
 }
 
 .surface-terminal:hover {
   border-color: rgba(255, 0, 60, 0.45);
-  box-shadow: 0 16px 40px -10px rgba(255, 0, 60, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 16px 40px -10px rgba(255, 0, 60, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 /* 3D Glass Navbar */
@@ -115,19 +142,25 @@
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid rgba(255, 0, 60, 0.2);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 0, 60, 0.08);
+  box-shadow:
+    0 10px 30px -10px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(255, 0, 60, 0.08);
 }
 
 /* Custom Builder Button */
 .btn-crimson {
   background: linear-gradient(135deg, #ff1744 0%, #ff003c 60%, #c4002d 100%);
   color: #ffffff;
-  box-shadow: 0 0 24px rgba(255, 0, 60, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 0 24px rgba(255, 0, 60, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
   transition: all 0.2s ease;
 }
 
 .btn-crimson:hover {
-  box-shadow: 0 0 35px rgba(255, 0, 60, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 0 35px rgba(255, 0, 60, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
   filter: brightness(1.08);
 }
@@ -150,13 +183,21 @@
    DUAL-SPEED OPPOSITE DIRECTION TICKER
 ───────────────────────────────────────────────────────────── */
 @keyframes ticker-ltr {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes ticker-rtl {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0%); }
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 
 .animate-ticker-left {
@@ -197,13 +238,7 @@
 
 /* Bottom Banner Typography */
 .banner-text-metallic {
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #ff4d6d 35%,
-    #ff003c 70%,
-    #7f1d1d 100%
-  );
+  background: linear-gradient(180deg, #ffffff 0%, #ff4d6d 35%, #ff003c 70%, #7f1d1d 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 35px rgba(255, 0, 60, 0.4));
@@ -224,6 +259,125 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
+   HERO ANIMATIONS — pure CSS, no runtime animation library
+   Replaces framer-motion. `.hero-letter` sets each glyph's own final state,
+   so the keyframe only declares `from` and uses `backwards` fill: during the
+   delay the glyph shows the `from` state, and once finished it falls back to
+   the element's own styles, which leaves `:hover` free to take over.
+───────────────────────────────────────────────────────────── */
+@keyframes letter-in {
+  from {
+    opacity: 0;
+    transform: translateY(36px) scale(0.45);
+    filter: blur(8px);
+    color: #ff003c;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--hero-rise, 12px));
+  }
+}
+
+.hero-letter {
+  opacity: 1;
+  transform: none;
+  color: #ffffff;
+  animation: letter-in 0.55s cubic-bezier(0.22, 1.2, 0.36, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 65ms + 100ms);
+  transition:
+    transform 0.12s ease,
+    color 0.12s ease,
+    text-shadow 0.12s ease;
+}
+
+.hero-letter:hover {
+  transform: translateY(-6px) scale(1.15);
+  color: #ff003c;
+  text-shadow: 0 0 25px rgba(255, 0, 60, 0.9);
+}
+
+.hero-rise {
+  animation: hero-rise 0.5s ease-out backwards;
+  animation-delay: var(--hero-delay, 0ms);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SCROLL REVEAL — CSS replacement for framer-motion whileInView
+   Same easing and travel as the previous JS implementation.
+───────────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   MOBILE NAV DRAWER
+   Always mounted; height is animated with `grid-template-rows: 0fr -> 1fr`
+   and the collapsed state uses `visibility: hidden`, which transitions
+   discretely (flips at the END of the close, at the START of the open).
+   That hides the content from the accessibility tree and from tab order
+   when closed, while still animating in both directions — no unmount hook
+   and no animation runtime required.
+───────────────────────────────────────────────────────────── */
+@media (max-width: 1023.98px) {
+  .mobile-drawer {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition:
+      grid-template-rows 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0.2s;
+  }
+
+  .mobile-drawer > .mobile-drawer-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .mobile-drawer[data-open='true'] {
+    grid-template-rows: 1fr;
+    visibility: visible;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   ACCORDION PANEL
+   Same technique as the drawer: `visibility: hidden` removes collapsed
+   answers from the a11y tree and keyboard order, `grid-template-rows`
+   animates the height without needing a measured pixel value.
+───────────────────────────────────────────────────────────── */
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows 0.25s ease-in-out,
+    visibility 0.25s;
+}
+
+.accordion-panel > * {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.accordion-panel[data-open='true'] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+}
+
+/* ─────────────────────────────────────────────────────────────
    ACCESSIBILITY: PREFERS-REDUCED-MOTION
 ───────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
@@ -234,8 +388,37 @@
     overflow-x: auto !important;
     flex-wrap: nowrap !important;
   }
-  
-  *, *::before, *::after {
+
+  /* Scroll-reveal must not leave content invisible for reduced-motion users. */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Hero entrance + wordmark cascade. */
+  .hero-rise,
+  .hero-letter {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    color: #ffffff !important;
+  }
+
+  .hero-letter:hover {
+    transform: none !important;
+  }
+
+  /* Drawer and accordion still need to toggle, just without sliding. */
+  .mobile-drawer,
+  .accordion-panel {
+    transition: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;

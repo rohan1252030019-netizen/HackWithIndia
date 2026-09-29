@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Build output and source maps carry no crawlable content.
+Disallow: /assets/
+
+Sitemap: TODO_UPDATE_PRODUCTION_DOMAIN/sitemap.xml
