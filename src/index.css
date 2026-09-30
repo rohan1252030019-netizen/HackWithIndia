@@ -1,14 +1,58 @@
 @import 'tailwindcss';
 
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+   Tailwind v4 reads @theme and generates utilities from it, so
+   `bg-ink-900`, `text-accent`, `border-line` etc. are real classes.
+   The scale is deliberately neutral-black: it lets the HWI crimson
+   read as the only saturated colour on the page.
+═══════════════════════════════════════════════════════════════ */
+@theme {
+  /* Foundation — warm-neutral blacks, not blue-blacks */
+  --color-ink-950: #080808;
+  --color-ink-900: #0c0c0c;
+  --color-ink-850: #101010;
+  --color-ink-800: #151515;
+  --color-ink-700: #1a1a1a;
+  --color-ink-600: #242424;
+
+  /* Surfaces */
+  --color-surface: #111111;
+  --color-surface-2: #161616;
+  --color-surface-3: #1c1c1c;
+
+  /* Hairlines */
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-line-mid: rgba(255, 255, 255, 0.13);
+  --color-line-strong: rgba(255, 255, 255, 0.22);
+
+  /* HWI crimson — unchanged identity */
+  --color-accent: #ff003c;
+  --color-accent-soft: #ff4d6d;
+  --color-accent-deep: #c4002d;
+
+  /* Type */
+  --color-chalk: #f4f4f6;
+  --color-chalk-2: #d4d4d8;
+  --color-chalk-3: #a1a1aa;
+  --color-chalk-4: #71717a;
+
+  --font-display: 'Cabinet Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
 @layer base {
   :root {
-    --bg-base: #050507;
-    --bg-surface-1: #0d0d12;
-    --bg-surface-2: #14141c;
-    --bg-surface-3: #1b1b26;
+    --bg-base: #080808;
+    --bg-alt: #0c0c0c;
+    --bg-raised: #101010;
+    --bg-surface-1: #111111;
+    --bg-surface-2: #161616;
+    --bg-surface-3: #1c1c1c;
 
     --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-muted: rgba(255, 255, 255, 0.16);
+    --border-muted: rgba(255, 255, 255, 0.13);
     --border-crimson: rgba(255, 0, 60, 0.45);
 
     --crimson-primary: #ff003c;
@@ -16,12 +60,12 @@
     --crimson-dark: #660018;
 
     /*
-      Reference tokens. Contrast ratios below were measured in-browser against
-      the actual Tailwind surfaces the site renders on, not assumed:
+      Reference tokens. Contrast ratios were measured in-browser against the
+      actual surfaces the site renders on, not assumed:
 
-        --text-primary  #f4f4f6  19.4:1 on #0d0d12   (AAA)
-        --text-secondary #cbd5e1 12.6:1 on #0d0d12   (AAA)
-        --text-muted    #94a3b8   7.2:1 on #0d0d12   (AA, and AAA for large text)
+        --text-primary   #f4f4f6  ~18.9:1 on #111111   (AAA)
+        --text-secondary #d4d4d8  ~13.1:1 on #111111   (AAA)
+        --text-muted     #a1a1aa   ~7.6:1 on #111111   (AA)
 
       IMPORTANT: the components use Tailwind's zinc scale directly rather than
       these variables, because that is what the existing design already used.
@@ -30,8 +74,8 @@
       4.0-4.2:1 and fails WCAG AA, which needs 4.5:1.
     */
     --text-primary: #f4f4f6;
-    --text-secondary: #cbd5e1;
-    --text-muted: #94a3b8;
+    --text-secondary: #d4d4d8;
+    --text-muted: #a1a1aa;
     --text-mono-accent: #ff4d6d;
   }
 
@@ -85,10 +129,10 @@
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #050507;
+    background: #080808;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1f1f2a;
+    background: #242424;
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -129,13 +173,15 @@
     72px 72px;
 }
 
-/* Translucent Terminal Surface */
+/* ─────────────────────────────────────────────────────────────
+   SURFACES
+───────────────────────────────────────────────────────────── */
 .surface-terminal {
-  background: #0d0d12;
+  background: #111111;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
     0 12px 36px -8px rgba(0, 0, 0, 0.8),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
   transition:
     border-color 0.25s ease,
     box-shadow 0.25s ease,
@@ -146,18 +192,18 @@
   border-color: rgba(255, 0, 60, 0.45);
   box-shadow:
     0 16px 40px -10px rgba(255, 0, 60, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 /* 3D Glass Navbar */
 .glass-header {
-  background: rgba(5, 5, 7, 0.85);
+  background: rgba(8, 8, 8, 0.82);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 0, 60, 0.2);
+  border-bottom: 1px solid rgba(255, 0, 60, 0.18);
   box-shadow:
     0 10px 30px -10px rgba(0, 0, 0, 0.9),
-    0 0 20px rgba(255, 0, 60, 0.08);
+    0 0 20px rgba(255, 0, 60, 0.06);
 }
 
 /* Custom Builder Button */
@@ -179,14 +225,14 @@
 }
 
 .btn-secondary {
-  background: #121218;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.13);
   color: #f4f4f6;
   transition: all 0.2s ease;
 }
 
 .btn-secondary:hover {
-  background: #181822;
+  background: #1c1c1c;
   border-color: rgba(255, 0, 60, 0.4);
   color: #ffffff;
   transform: translateY(-2px);
@@ -390,6 +436,572 @@
   visibility: visible;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN SYSTEM
+   Type scale, texture, and the editorial components the sections
+   are composed from. Everything here is CSS only — no runtime.
+═══════════════════════════════════════════════════════════════ */
+
+/* ── DISPLAY TYPE ───────────────────────────────────────────────
+   One scale, used everywhere. `clamp()` so the same class works from
+   320px to 1920px without a single breakpoint jump. */
+.display-hero {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3rem, 12vw, 10rem);
+  line-height: 0.85;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.display-1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.25rem, 6.4vw, 5.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.038em;
+  text-wrap: balance;
+}
+
+.display-2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.75rem, 3.9vw, 3.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.032em;
+  text-wrap: balance;
+}
+
+.display-3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.1vw, 1.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.022em;
+}
+
+/* Outline / hollow type for secondary display moments */
+.display-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.28);
+  transition: color 0.35s ease;
+}
+
+/* ── TECHNICAL LABELS ─────────────────────────────────────────────
+   The mono voice of the site: section indices, metadata, statuses. */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-chalk-3);
+}
+
+.mono-label-sm {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--color-chalk-3);
+}
+
+/* Section index numeral — oversized, hairline, sits in the margin */
+.section-index {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 0, 60, 0.35);
+  user-select: none;
+}
+
+/* ── TEXTURE ────────────────────────────────────────────────────
+   Grain is one fixed, non-interactive layer with a 180px tile. It is
+   rasterised once and never re-painted, so it costs nothing to scroll. */
+.grain-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* Faint technical grid, used to anchor large empty areas */
+.grid-etch {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* Horizontal scanlines — very low contrast, adds screen texture */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.022) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+/* ── HAIRLINES ──────────────────────────────────────────────── */
+.rule {
+  height: 1px;
+  background: var(--color-line);
+  position: relative;
+}
+
+/* A rule that starts crimson then fades — marks a section's opening beat */
+.rule-crimson::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 56px;
+  height: 1px;
+  background: var(--color-accent);
+  box-shadow: 0 0 12px rgba(255, 0, 60, 0.7);
+}
+
+/* Vertical hairline for editorial column splits */
+.rule-v {
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-line-mid) 18%,
+    var(--color-line-mid) 82%,
+    transparent
+  );
+}
+
+/* ── EDITORIAL NUMBERED ROW ─────────────────────────────────────
+   The workhorse for Objectives / Team / Roadmap. A hairline top, a
+   mono index, a display title, and a description that slides in. */
+.editorial-row {
+  position: relative;
+  display: grid;
+  gap: 0.5rem 2rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--color-line);
+  transition: border-color 0.3s ease;
+}
+
+.editorial-row:last-child {
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* Crimson rail that grows in from the left on hover */
+.editorial-row::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 1.75rem;
+  bottom: 1.75rem;
+  width: 2px;
+  background: var(--color-accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 14px rgba(255, 0, 60, 0.8);
+}
+
+.editorial-row:hover,
+.editorial-row:focus-within {
+  border-color: rgba(255, 0, 60, 0.35);
+}
+
+.editorial-row:hover::before,
+.editorial-row:focus-within::before {
+  transform: scaleY(1);
+}
+
+.editorial-row:hover .editorial-title,
+.editorial-row:focus-within .editorial-title {
+  color: var(--color-accent-soft);
+  transform: translateX(4px);
+}
+
+.editorial-title {
+  transition:
+    color 0.3s ease,
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── INTERACTIVE WORD ──────────────────────────────────────────
+   For the "WE ARE NOT JUST A CLUB" verbs. Underscore wipes in from
+   the left and the word shifts — both cheap, both reversible. */
+.interactive-word {
+  position: relative;
+  display: inline-block;
+  color: var(--color-chalk-3);
+  transition: color 0.3s ease;
+  cursor: default;
+}
+
+.interactive-word::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.1em;
+  height: 2px;
+  width: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 12px rgba(255, 0, 60, 0.7);
+}
+
+.interactive-word:hover,
+.interactive-word:focus-visible {
+  color: var(--color-chalk);
+  transform: translateX(6px);
+  transition:
+    color 0.3s ease,
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.interactive-word:hover::after,
+.interactive-word:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Metadata that reveals under an interactive word */
+.word-meta {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent-soft);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  margin-top: 0.35rem;
+}
+
+.interactive-word:hover .word-meta,
+.interactive-word:focus-visible .word-meta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── TERMINAL ────────────────────────────────────────────────── */
+.term {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.85;
+  background: #0c0c0c;
+  border: 1px solid var(--color-line);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Title bar with faux window controls — reads as a real shell */
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border-bottom: 1px solid var(--color-line);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.term-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.term-prompt {
+  color: var(--color-accent-soft);
+  font-weight: 600;
+}
+
+.term-ok {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.term-dim {
+  color: var(--color-chalk-4);
+}
+
+/* Dotted leaders between a term and its value */
+.term-leader {
+  color: rgba(255, 255, 255, 0.22);
+  letter-spacing: 0.05em;
+}
+
+/* Blinking block cursor */
+.cursor-blink {
+  display: inline-block;
+  width: 0.5em;
+  height: 1.05em;
+  vertical-align: -0.18em;
+  background: var(--color-accent);
+  box-shadow: 0 0 10px rgba(255, 0, 60, 0.8);
+  animation: cursor-blink 1.05s steps(1) infinite;
+}
+
+@keyframes cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Slow pulse on the "online" indicators */
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 0 rgba(255, 0, 60, 0.7);
+  animation: pulse-dot 2.4s ease-out infinite;
+}
+
+@keyframes pulse-dot {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 60, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(255, 0, 60, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 60, 0);
+  }
+}
+
+/* ── TIMELINE ──────────────────────────────────────────────────
+   A single crimson spine with nodes. The spine segment behind the
+   active stage brightens — driven purely by :hover / focus-within. */
+.timeline-spine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 0, 60, 0.55) 6%,
+    rgba(255, 0, 60, 0.55) 94%,
+    transparent
+  );
+}
+
+.timeline-node {
+  position: absolute;
+  left: -4px;
+  top: 1.9rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid var(--color-accent);
+  background: var(--color-ink-950);
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.timeline-node-active {
+  background: var(--color-accent);
+  box-shadow: 0 0 14px rgba(255, 0, 60, 0.9);
+}
+
+.timeline-stage:hover .timeline-node,
+.timeline-stage:focus-within .timeline-node {
+  transform: scale(1.5);
+}
+
+/* ── ECOSYSTEM MAP ───────────────────────────────────────────── */
+.map-node {
+  position: relative;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--color-line);
+  background: #111111;
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.map-node::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.map-node:hover,
+.map-node:focus-visible {
+  border-color: rgba(255, 0, 60, 0.5);
+  background: #161616;
+  transform: translateX(4px);
+}
+
+.map-node:hover::after,
+.map-node:focus-visible::after {
+  transform: scaleY(1);
+}
+
+.map-node-active {
+  border-color: rgba(255, 0, 60, 0.65);
+  background: #1a1013;
+}
+
+/* The hub at the centre of the domain map */
+.map-hub {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 0, 60, 0.45);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 0, 60, 0.14), transparent 68%);
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  box-shadow:
+    0 0 40px rgba(255, 0, 60, 0.18),
+    inset 0 0 30px rgba(255, 0, 60, 0.08);
+}
+
+/* Slow rotating dashed ring around the hub */
+.map-hub::after {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 0, 60, 0.28);
+  animation: hub-spin 26s linear infinite;
+}
+
+@keyframes hub-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── MARQUEE BAND ──────────────────────────────────────────────
+   Full-bleed horizontal ticker used as a rhythm break between
+   major sections. Words are display type, separators are crimson. */
+.marquee-band {
+  overflow: hidden;
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  padding: 1.1rem 0;
+  background: #0c0c0c;
+  user-select: none;
+}
+
+.marquee-band-sm {
+  padding: 0.6rem 0;
+  background: transparent;
+}
+
+/* Softens both edges so a ticker reads as continuing off-screen rather than
+   being chopped mid-word. Purely a paint mask — no layout, no JS. */
+.marquee-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* ── LINKS ───────────────────────────────────────────────────── */
+.link-slide {
+  position: relative;
+  display: inline-block;
+}
+
+.link-slide::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-slide:hover::after,
+.link-slide:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ── SCROLL PROGRESS ───────────────────────────────────────────
+   A 2px crimson bar pinned under the navbar. Width is driven by a
+   CSS custom property updated from a passive scroll listener. */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform-origin: left;
+  transform: scaleX(var(--progress, 0));
+  background: linear-gradient(90deg, var(--color-accent-deep), var(--color-accent));
+  box-shadow: 0 0 10px rgba(255, 0, 60, 0.6);
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* ── IMAGE REVEAL ────────────────────────────────────────────── */
+.img-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.img-reveal img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.img-reveal:hover img {
+  transform: scale(1.05);
+}
+
+/* ── MISC ────────────────────────────────────────────────────── */
+.crimson-rule-sm {
+  width: 28px;
+  height: 2px;
+  background: var(--color-accent);
+  box-shadow: 0 0 10px rgba(255, 0, 60, 0.8);
+}
+
+.surface-flat {
+  background: #111111;
+  border: 1px solid var(--color-line);
+}
+
 /* ─────────────────────────────────────────────────────────────
    ACCESSIBILITY: PREFERS-REDUCED-MOTION
 ───────────────────────────────────────────────────────────── */
@@ -427,6 +1039,50 @@
   .mobile-drawer,
   .accordion-panel {
     transition: none !important;
+  }
+
+  /* Design-system motion. Every one of these is decorative, so they
+     all switch off — none of them hides content. */
+  .cursor-blink,
+  .pulse-dot,
+  .map-hub::after {
+    animation: none !important;
+  }
+
+  .map-hub::after {
+    opacity: 0.6;
+  }
+
+  .editorial-row,
+  .editorial-row::before,
+  .editorial-title,
+  .interactive-word,
+  .interactive-word::after,
+  .word-meta,
+  .map-node,
+  .map-node::after,
+  .img-reveal img,
+  .link-slide::after {
+    transition: none !important;
+  }
+
+  .editorial-row::before {
+    transform: scaleY(1);
+  }
+
+  .interactive-word::after,
+  .link-slide::after {
+    transform: scaleX(1);
+  }
+
+  .word-meta {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Keep the marquee readable rather than frozen mid-word. */
+  .marquee-band {
+    overflow-x: auto;
   }
 
   *,

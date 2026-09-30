@@ -2,13 +2,13 @@ import { cn } from '../../lib/cn.js';
 
 /** Background tones used to alternate sections down the page. */
 const tones = {
-  base: 'bg-[#050507]',
-  alt: 'bg-[#07070a]',
-  raised: 'bg-[#0d0d12]',
+  base: 'bg-ink-950',
+  alt: 'bg-ink-900',
+  raised: 'bg-ink-850',
 };
 
 /**
- * Standard full-width page section: consistent vertical rhythm, gutters and
+ * Standard full-width page section: consistent vertical rhythm, gutters, and
  * the hairline top border that separates every band on this site.
  *
  * @param {string} id      Anchor id — also what useScrollSpy watches.
@@ -28,13 +28,15 @@ export function Section({
     <section
       id={id}
       className={cn(
-        'py-24 px-4 sm:px-6 border-t border-white/[0.08] relative',
+        'py-20 sm:py-28 px-4 sm:px-6 border-t border-line relative',
         tones[tone],
         className
       )}
       {...rest}
     >
-      <div className={cn(`${width} mx-auto`, innerClassName)}>{children}</div>
+      {/* Crimson tick at the section's opening edge — the page's spine marker */}
+      <span aria-hidden="true" className="rule-crimson absolute top-0 left-4 sm:left-6" />
+      <div className={cn(`${width} mx-auto relative`, innerClassName)}>{children}</div>
     </section>
   );
 }

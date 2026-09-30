@@ -1,80 +1,124 @@
 import { overview } from '../../data/objectives.js';
 import { Icon } from '../../lib/icons.jsx';
+import { Marquee } from '../ui/Marquee.jsx';
+import { Reveal } from '../ui/Reveal.jsx';
 import { Section } from '../layout/Section.jsx';
 
 export function Overview() {
-  const { schematic } = overview;
+  const { statement, schematic } = overview;
 
   return (
-    <Section id="overview" tone="alt" width="max-w-5xl">
-      {/* Section Label */}
-      <div className="flex items-center gap-2 mb-6">
-        <Icon name="TerminalSquare" size={16} className="text-[#ff003c]" aria-hidden="true" />
-        <span className="font-mono text-xs text-zinc-300 uppercase tracking-wider font-semibold">
-          {overview.label}
-        </span>
-      </div>
+    <Section id="overview" tone="alt" width="max-w-6xl">
+      {/* ── Editorial statement ── */}
+      <Reveal className="mb-14 sm:mb-20">
+        <p className="mono-label mb-6">{overview.label}</p>
 
-      {/* Editorial Headline */}
-      <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-display leading-[1.15] mb-8">
-        A year-round building ecosystem, <br className="hidden sm:block" />
-        not an annual weekend sprint.
-      </h2>
+        <h2 className="display-1 text-chalk">
+          {statement.lines.map((line, i) => (
+            <span key={line} className="block">
+              {i === statement.lines.length - 1 ? (
+                <span className="display-outline">{line}</span>
+              ) : (
+                line
+              )}
+            </span>
+          ))}
+        </h2>
 
-      {/* Editorial Pull-Quote */}
-      <div className="relative p-6 sm:p-10 rounded-2xl bg-gradient-to-r from-[#170a10] via-[#0e0e16] to-[#0a0a0f] border-l-4 border-l-[#ff003c] border border-white/[0.08] shadow-[0_12px_40px_-15px_rgba(255,0,60,0.22)] mb-12">
-        <div className="flex items-center gap-2 mb-3 text-[#ff003c]">
-          <Icon name="Quote" size={20} className="fill-[#ff003c]/20" aria-hidden="true" />
-          <span className="font-mono text-xs uppercase tracking-widest font-bold text-[#ff4d6d]">
-            {overview.charterLabel}
-          </span>
+        <div className="mt-8 sm:mt-10 flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
+          <p className="text-base sm:text-lg text-chalk-2 leading-relaxed max-w-md shrink-0">
+            {statement.lead}
+          </p>
+
+          {/* Interactive verbs — hover or keyboard-focus reveals the metadata */}
+          <ul className="flex flex-wrap gap-x-8 gap-y-5 lg:gap-x-10">
+            {overview.verbs.map((verb) => (
+              <li key={verb.word}>
+                <span className="interactive-word font-display font-extrabold text-2xl sm:text-3xl tracking-[-0.03em] uppercase">
+                  {verb.word}
+                  <span className="word-meta">{verb.meta}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
-        <blockquote className="text-xl sm:text-2xl md:text-3xl text-white font-display font-bold leading-snug tracking-tight">
-          {overview.charterQuote}
-        </blockquote>
-        <p className="mt-4 text-xs sm:text-sm text-zinc-300 font-mono leading-relaxed">
+      </Reveal>
+
+      {/* ── Charter pull-quote ── */}
+      <Reveal className="relative pl-6 sm:pl-10 py-8 sm:py-10 border-l-2 border-accent mb-16 sm:mb-20">
+        <div className="flex items-center gap-2 mb-4">
+          <Icon name="Quote" size={18} className="fill-accent/20 text-accent" aria-hidden="true" />
+          <span className="mono-label text-accent-soft">{overview.charterLabel}</span>
+        </div>
+        <blockquote className="display-2 text-chalk max-w-4xl">{overview.charterQuote}</blockquote>
+        <p className="mt-5 text-sm text-zinc-300 font-mono leading-relaxed max-w-2xl">
           {overview.charterBody}
         </p>
-      </div>
+      </Reveal>
 
-      {/* 2-Column Prose Narrative */}
-      <div className="grid md:grid-cols-2 gap-8 text-sm sm:text-base text-zinc-200 leading-relaxed mb-12">
-        {overview.paragraphs.map((paragraph) => (
-          <p key={paragraph.lead}>
-            <strong className="text-white">{paragraph.lead}</strong>
-            {paragraph.rest}
-          </p>
-        ))}
-      </div>
-
-      {/* Ecosystem Connectivity Schematic */}
-      <div className="p-5 sm:p-6 rounded-xl surface-terminal">
-        <div className="text-xs font-mono text-[#ff4d6d] font-semibold mb-4 flex items-center justify-between">
-          <span>{schematic.heading}</span>
-          <span className="text-zinc-400">{schematic.version}</span>
+      {/* ── Prose + architecture schematic ── */}
+      <div className="grid lg:grid-cols-12 gap-10 lg:gap-12">
+        <div className="lg:col-span-6 min-w-0 space-y-6 text-sm sm:text-base text-zinc-200 leading-relaxed">
+          {overview.paragraphs.map((paragraph) => (
+            <p key={paragraph.lead}>
+              <strong className="text-white font-semibold">{paragraph.lead}</strong>
+              {paragraph.rest}
+            </p>
+          ))}
         </div>
 
-        <ul className="grid sm:grid-cols-3 gap-4 text-center">
-          {schematic.nodes.map((node) => (
-            <li
-              key={node.title}
-              className={`p-4 rounded-lg border ${
-                node.tone === 'crimson'
-                  ? 'bg-[#1a1318] border-[#ff003c]/40 relative'
-                  : 'bg-[#14141d] border-white/[0.05]'
-              }`}
-            >
-              <Icon
-                name={node.icon}
-                size={22}
-                aria-hidden="true"
-                className={`mx-auto mb-2 ${node.tone === 'crimson' ? 'text-[#ff003c]' : 'text-zinc-300'}`}
-              />
-              <div className="font-bold text-white text-sm font-display">{node.title}</div>
-              <div className="text-xs text-zinc-200 mt-1">{node.desc}</div>
-            </li>
-          ))}
-        </ul>
+        <div className="lg:col-span-6 min-w-0">
+          <div className="surface-flat p-5 sm:p-6">
+            {/* Wraps: the schematic token is unbreakable and will not fit
+                beside the version string at 320px. */}
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-5">
+              <span className="mono-label text-accent-soft break-all">{schematic.heading}</span>
+              <span className="mono-label-sm text-chalk-4">{schematic.version}</span>
+            </div>
+
+            <ul className="space-y-2.5">
+              {schematic.nodes.map((node) => (
+                <li
+                  key={node.title}
+                  className={`flex items-center gap-3.5 p-3 border ${
+                    node.tone === 'crimson'
+                      ? 'border-accent/40 bg-accent/[0.06]'
+                      : 'border-line bg-ink-850'
+                  }`}
+                >
+                  <Icon
+                    name={node.icon}
+                    size={18}
+                    aria-hidden="true"
+                    className={node.tone === 'crimson' ? 'text-accent' : 'text-chalk-3'}
+                  />
+                  <div className="min-w-0">
+                    <div className="text-sm font-bold text-white font-display">{node.title}</div>
+                    <div className="text-xs text-zinc-300 mt-0.5">{node.desc}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Rhythm break ── */}
+      <div className="mt-16 sm:mt-24 -mx-4 sm:-mx-6">
+        <div className="marquee-band marquee-fade">
+          <Marquee speed={30}>
+            {['BUILD', 'BREAK', 'LEARN', 'SHIP', 'COMPETE', 'REPEAT'].map((word, i) => (
+              <span key={`${word}-${i}`} className="flex items-center shrink-0">
+                <span className="font-display font-extrabold text-2xl sm:text-4xl tracking-[-0.035em] text-chalk-3 uppercase whitespace-nowrap">
+                  {word}
+                </span>
+                <span className="text-accent px-5 sm:px-8 select-none" aria-hidden="true">
+                  ◆
+                </span>
+              </span>
+            ))}
+          </Marquee>
+        </div>
       </div>
     </Section>
   );

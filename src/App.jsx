@@ -30,10 +30,14 @@ import { BigBrandBanner } from './components/sections/BigBrandBanner.jsx';
  */
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#050507] text-[#f4f4f6] selection:bg-[#ff003c]/30 selection:text-white">
+    <div className="min-h-screen bg-ink-950 text-chalk selection:bg-accent/30 selection:text-white">
+      {/* Film grain. Fixed, non-interactive, one rasterised layer — gives the
+          flat black a physical surface without any per-frame cost. */}
+      <div aria-hidden="true" className="grain-layer" />
+
       <Navbar />
 
-      <main id="main">
+      <main id="main" className="relative z-[2]">
         <Hero />
         <Overview />
         <Objectives />

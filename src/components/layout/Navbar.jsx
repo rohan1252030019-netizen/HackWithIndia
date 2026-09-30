@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 
 import { navItems } from '../../data/site.js';
+import { useScrollProgress } from '../../hooks/useScrollProgress.js';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll.js';
 import { useScrollSpy } from '../../hooks/useScrollSpy.js';
 import { cn } from '../../lib/cn.js';
@@ -20,6 +21,7 @@ export function Navbar() {
   const navRef = useRef(null);
 
   const activeId = useScrollSpy(SECTION_IDS, { offset: 120 });
+  const progress = useScrollProgress();
   useLockBodyScroll(mobileOpen);
 
   useEffect(() => {
@@ -81,12 +83,15 @@ export function Navbar() {
         Skip to content
       </a>
 
+      {/* Reading progress. transform-only, so it stays on the compositor. */}
+      <div aria-hidden="true" className="scroll-progress" style={{ '--progress': progress }} />
+
       <nav
         ref={navRef}
         aria-label="Primary"
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-          scrolled ? 'glass-header py-3' : 'bg-transparent py-4 border-b border-white/[0.06]'
+          scrolled ? 'glass-header py-2.5' : 'bg-transparent py-4 border-b border-white/[0.06]'
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">

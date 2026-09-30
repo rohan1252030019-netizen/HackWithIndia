@@ -58,6 +58,47 @@ src/
 
 ---
 
+## Design system
+
+Everything visual lives in one place: `src/index.css`. There is no styling
+library and no animation runtime — the whole site is CSS, IntersectionObserver
+and native browser APIs.
+
+**Tokens** — declared in a Tailwind v4 `@theme` block, so they generate real
+utilities (`bg-ink-900`, `text-accent`, `border-line`, `font-display`):
+
+| Token                    | Value                | Role                  |
+| ------------------------ | -------------------- | --------------------- |
+| `ink-950 … ink-700`      | `#080808 … #1a1a1a`  | Foundation + surfaces |
+| `surface`, `surface-2/3` | `#111111`, `#161616` | Cards, panels         |
+| `line`, `line-mid`       | white @ 8%, 13%      | Hairlines             |
+| `accent`, `accent-soft`  | `#ff003c`, `#ff4d6d` | HWI crimson           |
+| `chalk … chalk-4`        | `#f4f4f6 … #71717a`  | Text ramp             |
+
+**Type** — three families, no more: Cabinet Grotesk (display), Inter (body),
+JetBrains Mono (technical labels, metadata, terminals). The `.display-*` scale
+is `clamp()`-based, so one class covers 320px → 1920px with no breakpoints.
+
+**Components** — `.editorial-row`, `.interactive-word`, `.map-node`,
+`.map-hub`, `.timeline-spine`, `.marquee-band`, `.term`, `.section-index`,
+`.grain-layer`, `.grid-etch`, `.scanlines`, `.link-slide`, `.scroll-progress`.
+See the `DESIGN SYSTEM` block in `index.css` for what each one does.
+
+**Rules when restyling**
+
+- Never reintroduce an animation library. The hero cascade, scroll reveals,
+  accordion and mobile drawer are all CSS; that decision is what keeps the
+  bundle at ~85 kB gzipped JS.
+- Do not use `zinc-500` or lighter for body text — see the contrast table below.
+- Every animation must have a `prefers-reduced-motion` rule, and no animation
+  may be the only thing that makes content visible.
+- Decorative marquees and the brand banner carry `aria-hidden`; the real
+  wordmark lives in the footer's `<h1>`-adjacent text and the hero `<h1>`.
+
+---
+
+---
+
 ## ⚠️ Values that still need your input
 
 These are deliberate placeholders. The site renders an honest "to be

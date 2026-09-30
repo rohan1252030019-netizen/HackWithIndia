@@ -3,54 +3,66 @@ import { ChevronDown } from 'lucide-react';
 import { cn } from '../../lib/cn.js';
 
 /**
- * Single-open accordion.
+ * Editorial accordion — hairline rows rather than floating cards, so it
+ * belongs to the same system as the objectives and team rosters.
  *
  * Height is animated with `grid-template-rows: 0fr -> 1fr` and the collapsed
  * state is `visibility: hidden`, which removes the answer from the
- * accessibility tree and from tab order while still animating shut.
- *
- * Keyboard support is native: each header is a real <button> inside a
- * heading, wired up with `aria-expanded` / `aria-controls`.
+ * accessibility tree and from tab order while still animating both ways.
+ * Full keyboard support is native: each header is a real <button> in a heading.
  */
-export function Accordion({ items, questionClassName, className }) {
+export function Accordion({ items, className }) {
   const [openIndex, setOpenIndex] = useState(null);
   const baseId = useId();
 
   return (
-    <div className={cn('space-y-3', className)}>
+    <div className={className}>
       {items.map((item, index) => {
         const isOpen = openIndex === index;
         const buttonId = `${baseId}-q-${index}`;
         const panelId = `${baseId}-a-${index}`;
 
         return (
-          <div
-            key={item.q}
-            className="rounded-xl surface-terminal overflow-hidden transition-colors"
-          >
+          <div key={item.q} className="border-t border-line last:border-b">
             <h3>
               <button
                 id={buttonId}
                 type="button"
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className={cn(
-                  'w-full p-5 text-left flex items-center justify-between gap-4',
-                  'font-semibold text-sm sm:text-base text-zinc-100 hover:text-white',
-                  'transition-colors focus-visible:outline-none',
-                  questionClassName
-                )}
+                className="group w-full flex items-start gap-4 sm:gap-6 py-5 sm:py-6 text-left focus-visible:outline-none"
                 aria-expanded={isOpen}
                 aria-controls={panelId}
               >
-                <span className="font-display">{item.q}</span>
-                <ChevronDown
-                  size={16}
-                  aria-hidden="true"
+                <span
                   className={cn(
-                    'text-[#ff003c] flex-shrink-0 transition-transform duration-200',
-                    isOpen && 'rotate-180'
+                    'mono-label shrink-0 pt-1.5 transition-colors duration-300',
+                    isOpen ? 'text-accent' : 'text-chalk-4'
                   )}
-                />
+                  aria-hidden="true"
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
+                <span
+                  className={cn(
+                    'flex-1 font-display font-bold text-base sm:text-xl leading-snug tracking-[-0.02em] transition-colors duration-300',
+                    isOpen ? 'text-accent-soft' : 'text-chalk group-hover:text-chalk-2'
+                  )}
+                >
+                  {item.q}
+                </span>
+
+                <span
+                  className={cn(
+                    'shrink-0 w-7 h-7 border grid place-items-center transition-all duration-300 mt-0.5',
+                    isOpen
+                      ? 'border-accent/50 text-accent rotate-180'
+                      : 'border-line text-chalk-3 group-hover:border-accent/40 group-hover:text-accent'
+                  )}
+                  aria-hidden="true"
+                >
+                  <ChevronDown size={14} />
+                </span>
               </button>
             </h3>
 
@@ -62,9 +74,9 @@ export function Accordion({ items, questionClassName, className }) {
               className="accordion-panel"
             >
               <div>
-                <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-zinc-200 leading-relaxed border-t border-white/[0.05]">
+                <p className="pb-6 pl-10 sm:pl-[4.1rem] pr-10 text-sm text-zinc-200 leading-relaxed max-w-3xl">
                   {item.a}
-                </div>
+                </p>
               </div>
             </div>
           </div>

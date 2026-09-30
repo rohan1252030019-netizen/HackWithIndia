@@ -55,5 +55,60 @@ export const hero = {
     { text: 'WITH', letters: ['W', 'I', 'T', 'H'] },
     { text: 'INDIA', letters: ['I', 'N', 'D', 'I', 'A'] },
   ],
-  secondaryCtaLabel: `Explore ${site.academicYear} Roadmap`,
+
+  /** Small technical metadata strip above the wordmark. */
+  meta: [
+    { key: 'CAMPUS', value: 'VIT PUNE' },
+    { key: 'TYPE', value: 'TECH COMMUNITY' },
+    { key: 'CYCLE', value: site.academicYear },
+  ],
+
+  /**
+   * The editorial statement. Two beats, deliberately set as display type so
+   * the hero reads as a poster rather than a headline + paragraph.
+   */
+  statement: { lead: "WE DON'T JUST", body: ['LEARN TECH.', 'WE BUILD IT.'] },
+
+  /**
+   * Domain strip.
+   *
+   * Every entry here is real and traceable:
+   *   AI / ML       — the AIML branch, and "AI Systems" in src/data/ecosystem.js
+   *   CYBERSECURITY — "CTF & Cybersecurity" in src/data/ecosystem.js
+   *   WEB           — "Web3 & Blockchain" / web work in the same file
+   *   OPEN SOURCE   — a named track in src/data/ecosystem.js
+   *   CLOUD         — "Cloud & Infra" track
+   *   DESIGN        — the "UI/UX Design Lead" role in src/data/team.js
+   * Nothing here is invented; the labels are display-length abbreviations of
+   * existing chapter programmes and roles.
+   */
+  domains: [
+    { label: 'AI / ML', source: 'ecosystem: AI Systems' },
+    { label: 'CYBERSECURITY', source: 'ecosystem: CTF & Cybersecurity' },
+    { label: 'WEB', source: 'ecosystem: Web3 & Blockchain' },
+    { label: 'OPEN SOURCE', source: 'ecosystem: Open Source' },
+    { label: 'CLOUD', source: 'ecosystem: Cloud & Infra' },
+    { label: 'DESIGN', source: 'team: UI/UX Design Lead' },
+  ],
+
+  /**
+   * Compact status panel. The values describe the chapter's own model
+   * (year-round, free, student-run) and its published programmes — they are
+   * not performance metrics.
+   */
+  terminal: {
+    prompt: 'hwi@vit:~$',
+    command: './initialize',
+    lines: [
+      { label: 'COMMUNITY', value: 'ONLINE' },
+      { label: 'BUILDERS', value: 'ONLINE' },
+      { label: 'EVENTS', value: 'ACTIVE' },
+      { label: 'IDEAS', value: 'UNLIMITED' },
+    ],
+    status: 'READY_TO_BUILD',
+  },
+
+  primaryCta: 'Join HWI',
+  secondaryCta: 'Explore the community',
+  secondaryCtaTarget: 'ecosystem',
 };

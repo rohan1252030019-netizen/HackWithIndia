@@ -28,6 +28,7 @@ export const eventsIntro = {
 export const events = [
   {
     id: 'national-hackathon-2026',
+    quarter: 'Q1',
     title: 'HackWithIndia National Hackathon 2026 — VIT Pune',
     date: 'October 2026',
     time: 'TODO_TIME',
@@ -42,6 +43,7 @@ export const events = [
   },
   {
     id: 'ai-cloud-masterclasses',
+    quarter: 'Q2',
     title: 'AI Systems & Cloud Masterclass Series',
     date: 'November – December 2026',
     time: 'TODO_TIME',
@@ -56,6 +58,7 @@ export const events = [
   },
   {
     id: 'open-source-sprint',
+    quarter: 'Q3',
     title: 'Annual Open-Source Contribution Sprint',
     date: 'January – February 2027',
     time: 'TODO_TIME',
@@ -70,6 +73,7 @@ export const events = [
   },
   {
     id: 'internal-demo-day',
+    quarter: 'Q3',
     title: 'Internal Demo Day & Prototype Showcase',
     date: 'January – February 2027',
     time: 'TODO_TIME',
@@ -84,6 +88,7 @@ export const events = [
   },
   {
     id: 'annual-hackathon-2027',
+    quarter: 'Q4',
     title: 'HackWithIndia VIT National Hackathon 2027',
     date: 'March – April 2027',
     time: 'TODO_TIME',

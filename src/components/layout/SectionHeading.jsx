@@ -2,37 +2,51 @@ import { Icon } from '../../lib/icons.jsx';
 import { cn } from '../../lib/cn.js';
 
 /**
- * The section eyebrow used throughout the site: a crimson icon, a monospace
- * uppercase label, then the display heading and an optional lead paragraph.
+ * Section header: oversized index numeral, mono eyebrow, display heading, and
+ * an optional lead paragraph.
  *
- * `align="center"` reproduces the centred variant used by Benefits, Roadmap,
- * Partners, Team and FAQ; the default left-aligns (Overview, Objectives,
- * Ecosystem).
+ * `align="center"` reproduces the centred variant; the default left-aligns.
+ * `index` is the section's position in the page (01, 02, …) — pure wayfinding,
+ * so it is hidden from assistive tech to avoid noise.
  */
-export function SectionHeading({ icon, label, title, description, align = 'left', className }) {
+export function SectionHeading({
+  index,
+  icon,
+  label,
+  title,
+  description,
+  align = 'left',
+  className,
+}) {
   const isCenter = align === 'center';
 
   return (
     <div
       className={cn(
-        'mb-14',
-        isCenter && 'text-center max-w-2xl mx-auto',
-        !isCenter && 'max-w-2xl',
+        'mb-12 sm:mb-16',
+        isCenter ? 'max-w-2xl mx-auto text-center' : 'max-w-3xl',
         className
       )}
     >
-      <div className={cn('flex items-center gap-2 mb-3', isCenter && 'justify-center')}>
-        {icon && <Icon name={icon} size={16} className="text-[#ff003c]" aria-hidden="true" />}
-        <span className="font-mono text-xs text-zinc-300 uppercase tracking-wider font-semibold">
-          {label}
-        </span>
+      <div className={cn('flex items-baseline gap-4 mb-5', isCenter && 'justify-center')}>
+        {index && (
+          <span aria-hidden="true" className="section-index shrink-0">
+            {index}
+          </span>
+        )}
+        <div className={cn('flex items-center gap-2', isCenter && 'justify-center')}>
+          {icon && <Icon name={icon} size={15} className="text-accent" aria-hidden="true" />}
+          <span className="mono-label text-chalk-2">{label}</span>
+        </div>
       </div>
 
-      <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-display mb-4">
-        {title}
-      </h2>
+      <h2 className="display-2 text-chalk">{title}</h2>
 
-      {description && <p className="text-sm text-zinc-300 leading-relaxed">{description}</p>}
+      {description && (
+        <p className="text-sm sm:text-base text-zinc-300 leading-relaxed mt-4 max-w-2xl">
+          {description}
+        </p>
+      )}
     </div>
   );
 }

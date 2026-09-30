@@ -59,6 +59,29 @@ export const supportingPillars = [
 export const overview = {
   label: 'Chapter Philosophy & Model',
   headline: 'A year-round building ecosystem, not an annual weekend sprint.',
+
+  /** The editorial statement that opens the section. */
+  statement: {
+    lines: ['WE ARE', 'NOT JUST', 'A CLUB.'],
+    lead: 'A community where students learn, build, compete, collaborate and ship real technology.',
+  },
+
+  /**
+   * Interactive verbs under the statement.
+   *
+   * Each `meta` line is drawn from existing chapter data, not invented:
+   *   LEARN   → joinPerks: workshops & code-along bootcamps
+   *   BUILD   → ecosystem projectTracks: Open Source
+   *   COMPETE → ecosystem projectTracks: Hackathons, CTF & Cybersecurity
+   *   LEAD    → team.js openRoles
+   */
+  verbs: [
+    { word: 'LEARN', meta: 'workshops · masterclasses' },
+    { word: 'BUILD', meta: 'projects · open source' },
+    { word: 'COMPETE', meta: 'hackathons · ctf' },
+    { word: 'LEAD', meta: 'committees · open roles' },
+  ],
+
   charterLabel: 'VIT Pune Chapter Charter // Mission Statement',
   charterQuote:
     '“A year-round ecosystem connecting builders, startups, and mentors — not an annual weekend sprint.”',

@@ -1,52 +1,71 @@
 import { ArrowRight, Mail } from 'lucide-react';
 
 import { finalCta } from '../../data/faqs.js';
-import { navItems, site } from '../../data/site.js';
+import { site } from '../../data/site.js';
 import { Button } from '../ui/Button.jsx';
+import { Reveal } from '../ui/Reveal.jsx';
+
+const STATEMENT = ['BUILD', 'SOMETHING', 'WORTH', 'SHOWING.'];
 
 export function FinalCTA() {
   const scrollToId = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  const joinItem = navItems.find((item) => item.id === 'join');
 
   return (
-    <section className="py-24 px-4 sm:px-6 border-t border-white/[0.08] bg-gradient-to-b from-[#07070a] via-[#11050a] to-[#050507] text-center relative overflow-hidden">
-      <div className="max-w-4xl mx-auto">
-        <span className="text-xs font-mono font-bold text-[#ff4d6d] uppercase tracking-wider mb-4 inline-block px-3 py-1 rounded bg-[#ff003c]/15 border border-[#ff003c]/30">
-          {finalCta.badge}
-        </span>
+    <section
+      className="relative bg-ink-950 border-t border-line py-24 sm:py-36 px-4 sm:px-6 overflow-hidden"
+      aria-labelledby="final-cta-heading"
+    >
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[820px] h-[340px] bg-accent/[0.08] blur-[150px] rounded-full pointer-events-none"
+      />
+      <div aria-hidden="true" className="absolute inset-0 grid-etch pointer-events-none" />
 
-        <h2 className="text-3xl sm:text-6xl font-black text-white tracking-tight mb-5 font-display">
-          {finalCta.title}
+      <div className="relative max-w-6xl mx-auto">
+        <p className="mono-label mb-8">{finalCta.badge}</p>
+
+        <h2 id="final-cta-heading" className="display-hero text-chalk">
+          {STATEMENT.map((line, i) => (
+            <span key={line} className="block">
+              {i === STATEMENT.length - 1 ? <span className="text-accent-soft">{line}</span> : line}
+            </span>
+          ))}
         </h2>
 
-        <p className="text-sm sm:text-base text-zinc-200 max-w-xl mx-auto mb-8 leading-relaxed px-2">
-          {finalCta.description}
-        </p>
+        <Reveal className="mt-10 sm:mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
+          <p className="lg:col-span-5 text-sm sm:text-base text-zinc-300 leading-relaxed max-w-md">
+            {finalCta.description}
+          </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
-          <Button
-            href="#join"
-            size="lg"
-            className="w-full sm:w-auto shadow-xl"
-            onClick={(event) => {
-              event.preventDefault();
-              scrollToId(joinItem.id);
-            }}
-          >
-            <span>Join HWI</span>
-            <ArrowRight size={16} aria-hidden="true" />
-          </Button>
+          <div className="lg:col-span-7 flex flex-col sm:flex-row gap-3 sm:justify-end">
+            <Button
+              href="#join"
+              size="lg"
+              className="group"
+              onClick={(event) => {
+                event.preventDefault();
+                scrollToId('join');
+              }}
+            >
+              <span>Join HWI</span>
+              <ArrowRight
+                size={16}
+                aria-hidden="true"
+                className="transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </Button>
 
-          <Button
-            href={`mailto:${site.contact.email}`}
-            variant="secondary"
-            size="lg"
-            className="w-full sm:w-auto font-semibold"
-          >
-            <Mail size={16} className="text-[#ff4d6d]" aria-hidden="true" />
-            <span>Contact Chapter Leads</span>
-          </Button>
-        </div>
+            <Button
+              href={`mailto:${site.contact.email}`}
+              variant="secondary"
+              size="lg"
+              className="group"
+            >
+              <Mail size={16} className="text-accent" aria-hidden="true" />
+              <span>Contact Chapter Leads</span>
+            </Button>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -16,6 +16,25 @@ export const joinIntro = {
     'HWI is open to every enrolled VIT Pune student, in every year and every branch. Membership is free — everything we run is funded by partners and run by students.',
 };
 
+/** The recruitment beat. Editorial copy, no factual claims beyond the above. */
+export const joinStatement = {
+  lines: ["YOU'VE SCROLLED", 'THIS FAR.'],
+  pitch: 'MAYBE YOU BELONG HERE.',
+  closer: 'BUILD WITH US.',
+};
+
+/**
+ * Terminal body. The checklist lines are the real membership benefits taken
+ * verbatim from `joinPerks` — nothing here is aspirational filler.
+ */
+export const joinTerminal = {
+  title: 'hwi@vit:~/why-join',
+  prompt: 'hwi@vit:~$',
+  command: './why-join',
+  call: '> chapter.benefits.forEach(print)',
+  closing: 'hwi@vit:~$',
+};
+
 export const joinWho = {
   title: 'Who can join',
   points: [

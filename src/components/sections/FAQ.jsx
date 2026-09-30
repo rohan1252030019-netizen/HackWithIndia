@@ -5,14 +5,14 @@ import { SectionHeading } from '../layout/SectionHeading.jsx';
 
 export function FAQ() {
   return (
-    <Section id="faq" tone="alt" width="max-w-3xl">
+    <Section id="faq" tone="alt" width="max-w-4xl">
       <SectionHeading
+        index="11"
         icon="BookOpen"
         label={faqIntro.label}
         title={faqIntro.title}
         description={faqIntro.description}
-        align="center"
-        className="max-w-xl mb-14"
+        className="mb-10"
       />
 
       <Accordion items={faqs} />
